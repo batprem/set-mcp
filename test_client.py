@@ -27,6 +27,7 @@ async def main():
                     to_year=2024,
                 ),
             )
-            print(result)
+            assert not result.isError
+
 
 asyncio.run(main())
