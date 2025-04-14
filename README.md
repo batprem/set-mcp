@@ -39,13 +39,20 @@ Run
 uvx set-mcp
 ```
 
-### MCP.json
+### Using with `pipx`
+
+```
+pipx install set-mcp
+pipx run set-mcp
+```
+
+### MCP.json example
 
 ```json
 {
     "mcpServers": {
       "set_mcp": {
-        "command": "/Users/premchotipanit/.local/bin/uvx",
+        "command": "/path/to/bin/uvx", // Edit to your uvx path
         "args": [
             "set-mcp"
         ],
