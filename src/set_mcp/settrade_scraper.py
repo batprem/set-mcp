@@ -160,10 +160,10 @@ def transform_statements_to_df(
 
     Returns:
         DataFrame with account codes, names, and yearly amounts as columns
-    """ # noqa
+    """  # noqa
     if not statement_list:
         return pd.DataFrame()
-        
+
     df, *remaining_statements = statement_list
     df[year_range[0]] = df["amount"]
     df = df[["accountCode", "accountName", year_range[0]]]
@@ -239,9 +239,7 @@ async def get_financial_statement_from_year(
 if __name__ == "__main__":
 
     async def main():
-        financial_statement = await get_financial_statement_from_year(
-            "BH", 2022, 2024
-        )
+        financial_statement = await get_financial_statement_from_year("BH", 2022, 2024)
         print(financial_statement)
 
     asyncio.run(main())
