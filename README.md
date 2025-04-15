@@ -1,4 +1,5 @@
 # SET-MCP
+[![smithery badge](https://smithery.ai/badge/set-mcp)](https://smithery.ai/server/set-mcp)
 
 SET-MCP is a Python package that provides tools for serving Model Context Protocol which can access the Securities Exchange of Thailand (SET). It allows AI agents to retrieve comprehensive financial statements including income statements, balance sheets, and cash flow statements for listed companies.
 
@@ -19,6 +20,14 @@ The package requires Python 3.11 or higher. You can install it using pip:
 
 ```bash
 pip install set-mcp
+```
+
+### Installing via Smithery
+
+To install set-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/set-mcp):
+
+```bash
+npx -y @smithery/cli install set-mcp --client claude
 ```
 
 ## Usage
