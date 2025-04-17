@@ -6,7 +6,9 @@ from .settrade_scraper import (
     get_financial_statement_from_year,
     FinancialStatement,
 )
-
+from mcp.server.sse import SseServerTransport
+import uvicorn
+import asyncio
 
 mcp = FastMCP("Set Balance Sheet")
 
@@ -56,6 +58,41 @@ async def get_financial_statement(symbol: str, from_year: int, to_year: int) -> 
     return context
 
 
+async def run_sse_async(mcp: FastMCP, host: str, port: int) -> None:
+    """Run the server using SSE transport."""
+    from starlette.applications import Starlette
+    from starlette.routing import Mount, Route
+
+    sse = SseServerTransport("/messages/")
+
+    async def handle_sse(request):
+        async with sse.connect_sse(
+            request.scope, request.receive, request._send
+        ) as streams:
+            await mcp._mcp_server.run(
+                streams[0],
+                streams[1],
+                mcp._mcp_server.create_initialization_options(),
+            )
+
+    starlette_app = Starlette(
+        debug=mcp.settings.debug,
+        routes=[
+            Route("/sse", endpoint=handle_sse),
+            Mount("/messages/", app=sse.handle_post_message),
+        ],
+    )
+
+    config = uvicorn.Config(
+        starlette_app,
+        host=host,
+        port=port,
+        log_level=mcp.settings.log_level.lower(),
+    )
+    server = uvicorn.Server(config)
+    await server.serve()
+
+
 @click.command()
 @click.option("--port", default=8000, help="Port to listen on for SSE")
 @click.option("--host", default="0.0.0.0", help="Host to listen on")
@@ -69,7 +106,7 @@ def main(transport: Literal["stdio", "sse"], host: str, port: int):
     if transport == "stdio":
         mcp.run(transport=transport)
     elif transport == "sse":
-        raise NotImplementedError("SSE transport is not implemented")
+        asyncio.run(run_sse_async(mcp, host, port))
     else:
         raise ValueError(f"Invalid transport: {transport}")
 
