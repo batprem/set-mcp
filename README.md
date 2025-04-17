@@ -70,6 +70,10 @@ pipx run set-mcp
 }
 ```
 
+### Vercel
+
+Coming soon
+
 Available options:
 - `--port`: Port to listen on for SSE (default: 8000)
 - `--host`: Host to listen on (default: 0.0.0.0)
