@@ -22,6 +22,11 @@ dev = [
     "jupyter>=1.1.1",
     "pyright>=1.1.399",
 ]
+client = [
+    "google-genai>=1.12.1",
+    "google-generativeai>=0.8.5",
+    "pocketflow>=0.0.2",
+]
 
 [project.scripts]
 set-mcp = "set_mcp.__main__:main"
