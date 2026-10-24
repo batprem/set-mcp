@@ -1,5 +1,5 @@
 # SET-MCP
-[![smithery badge](https://smithery.ai/badge/set-mcp)](https://smithery.ai/server/set-mcp)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.batprem/set-mcp)](https://lightnow.ai/servers/io.github.batprem/set-mcp)
 
 SET-MCP is a Python package that provides tools for serving Model Context Protocol which can access the Securities Exchange of Thailand (SET). It allows AI agents to retrieve comprehensive financial statements including income statements, balance sheets, and cash flow statements for listed companies.
 
